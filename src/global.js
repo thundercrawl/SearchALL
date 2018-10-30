@@ -1,6 +1,7 @@
 import apiAxios from './axios';
 import { Message } from 'element-ui';
 import tools from './tools';
+import config from './config';
 
 const global = {}
 global.menuStore = new Array();
@@ -251,6 +252,11 @@ let loadkunpengCity = function(that) {
 
 
 export default {
+    logInfo: function(info) {
+        if (config.debug == true) {
+            console.log(info)
+        }
+    },
     remote() {
         return global.remoteUrl;
     },

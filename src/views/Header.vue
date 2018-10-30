@@ -92,7 +92,8 @@
         computed:{
             currUserName(){
                // console.log(this)
-                this.getUserInfo();
+                if(this.getUserInfo() == null)
+                    return ''
                 return this.getUserInfo().userName;
             },
             currDeptName(){
@@ -133,7 +134,9 @@
 
             },
             getUserInfo(){
-                logInfo("get userInfo")
+                this.$global.logInfo("enter getuserInfo")
+                var userinfo = sessionStorage.getItem('userInfo');
+                
                 return JSON.parse(sessionStorage.getItem('userInfo'));
             },
             handleCommand(command) {
