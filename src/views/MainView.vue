@@ -3,7 +3,10 @@
   <el-header>Header
      <headView/>
   </el-header>
-  <el-main>MainView</el-main>
+  <el-main>MainView
+    <bodyView/>
+
+  </el-main>
   <el-footer>Footer</el-footer>
 </el-container>
 
@@ -11,9 +14,11 @@
 
 <script>
 import headView from '@/views/Header.vue' 
+import bodyView from '@/views/Body.vue'
  export default {
         components:{
-            headView
+            headView,
+            bodyView
         }
         
     }

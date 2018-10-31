@@ -19,14 +19,16 @@ Vue.prototype.$global = global;
 Vue.prototype.$tools = tools;
 Vue.prototype.$http = apiAxios;
 
-
+function logInfo(info) {
+    if (config.debug == true) {
+        console.log(info)
+    }
+}
 
 /*register components*/
 import button from '@/components/buttons/button.vue';
 
 Vue.component(button.name, button);
-
-
 
 
 /*init instance*/
@@ -52,14 +54,18 @@ new Vue({
             // sessionStorage.removeItem('isAddRouters');
             var domRoute = window.location.hash.substr(1);
 
-            this.$global.logInfo("load session storage when refresh")
-            this.$global.logInfo(sessionStorage)
+            logInfo("load session storage when refresh, and enabled debug " + config.debug)
+            logInfo(sessionStorage)
+            logInfo("router obj:")
+            logInfo(this.$router)
                 //为什么刷新后这里的this.$route.path始终是"/"呢，所以先用dom方法判断
             if (domRoute === "/" || domRoute === "/login") {
-                this.$cookie.set('userName', "", -1);
-                // this.$cookie.get('userInfo', "", -1);
-                // this.$cookie.get('userMenu', "", -1);
-
+                this.$cookie.set('userName', 'defaultUser', -1);
+                sessionStorage.setItem('userName', 'defaultUser')
+                    // this.$cookie.get('userInfo', "", -1);
+                    // this.$cookie.get('userMenu', "", -1);
+                this.$global.logInfo(this.$cookie + " cookie username:" + this.$cookie.get('userName'))
+                this.$global.logInfo(sessionStorage + " session username:" + sessionStorage.getItem('userName'))
                 sessionStorage.removeItem('userInfo');
                 sessionStorage.removeItem('userMenu');
             }
