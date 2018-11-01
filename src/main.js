@@ -9,7 +9,8 @@ import config from './config';
 /*module dependency*/
 import ElementUI from 'element-ui';
 import VueCookie from "vue-cookie";
-
+/*themes import*/
+//import './theme/iview.less'
 
 
 Vue.config.productionTip = false
@@ -52,6 +53,7 @@ new Vue({
         windowRefresh: function() {
             //刷新后加载的都是模块 不需要router
             // sessionStorage.removeItem('isAddRouters');
+
             var domRoute = window.location.hash.substr(1);
 
             logInfo("load session storage when refresh, and enabled debug " + config.debug)
@@ -68,6 +70,7 @@ new Vue({
                 this.$global.logInfo(sessionStorage + " session username:" + sessionStorage.getItem('userName'))
                 sessionStorage.removeItem('userInfo');
                 sessionStorage.removeItem('userMenu');
+                this.$router.push('/')
             }
             if (domRoute !== "/" && domRoute !== "/login") {
                 // let userInfo = this.$cookie.get('userInfo');
@@ -77,7 +80,7 @@ new Vue({
                 this.$store.commit("saveUserInfo", JSON.parse(userInfo));
                 this.$store.commit("saveUserMenu", JSON.parse(userMenu));
                 this.$store.commit('setActiveIndex', '/home/index');
-                this.$router.push('/home/index');
+                this.$router.push('/');
             }
         }
     }

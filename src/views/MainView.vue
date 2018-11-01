@@ -1,15 +1,10 @@
 <template>
-  <el-container>
-  <el-header>Header
+ <div>
      <headView/>
-  </el-header>
-  <el-main>MainView
+
     <bodyView/>
 
-  </el-main>
-  <el-footer>Footer</el-footer>
-</el-container>
-
+  </div>
 </template>
 
 <script>
