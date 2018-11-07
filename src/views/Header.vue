@@ -1,11 +1,13 @@
 <template>
     <div class="header">
 
-        <img class="logoimage" src="@/assets/searchAll.jpg"/>
+        <img class="logoimage" src="@/assets/vision_dark.gif"/>
         <div class="logo">Global Search</div>
-        <div class="login-name"><span>登录人:</span>&nbsp;<span>{{currUserName}}</span></div>
+        <div class="search"> <searchView/></div>
+        
         <!--<div class="login-name"><span>当前部门:</span>&nbsp;<span>{{currDeptName}}</span></div>-->
         <div class="user-info">
+            <div class="login-name"><span>登录人:</span>&nbsp;<span>{{currUserName}}</span></div>
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
                    <img src="@/assets/loginOut.png" alt="" width="25">
@@ -14,11 +16,14 @@
                     <el-dropdown-item command="logout">退出</el-dropdown-item>
                   <!--  <el-dropdown-item command="userInfo">个人信息</el-dropdown-item>-->
                     <el-dropdown-item command="updatePassword">修改密码</el-dropdown-item>
+                    <el-dropdown-item command="showTest"> test </el-dropdown-item>
                 </el-dropdown-menu>
+            
             </el-dropdown>
         </div>
         <div class="headerTimer">
         </div>
+
          <el-dialog title="重置密码" width="500px" :visible.sync ="changePasswordVisable" :close-on-click-modal="false">
         <el-form :model="addForm"  status-icon label-width="80px" :rules="addFormRules" ref="addForm" >
            <el-form-item label="新密码" prop="p1" >
@@ -39,8 +44,12 @@
     </div>
 </template>
 <script>
-
+import searchView from '@/views/Search.vue'
     export default {
+         name: 'header',
+        components: {
+            searchView
+        },
         data(){
             let validatePass = (rule,value, callback) => {
                
@@ -90,10 +99,13 @@
       }
         },
         computed:{
+           
             currUserName(){
                // console.log(this)
                 if(this.getUserInfo() == null)
-                    return ''
+                    {
+                       return sessionStorage.getItem('defaultuserName')
+                    }
                 return this.getUserInfo().userName;
             },
             currDeptName(){
@@ -159,6 +171,10 @@
                     this.changePasswordVisable = true;
 
                 }
+                else if( command == 'showTest')
+                {
+                    this.$router.push('/test')
+                }
 
             },
             clearCookie : function(){
@@ -204,6 +220,10 @@
         font-size: 22px;
         line-height: 70px;
         color: #fff;
+        display: inline-flex;
+        vertical-align: middle;
+      
+
     }
     .header .logo{
         float: left;
@@ -215,16 +235,20 @@
         float: left;
         padding-left:10px;
         padding-top:20px;
-        top: 60px;
-        width: 130px;
+        top: 10px;
+        width: 60px;
         height: 30px;
         
     }
-    .user-info {
-        float: right;
+    .header .user-info {
+        display:right;
         padding-right: 10px;
         font-size: 16px;
         color: #fff;
+        
+        position: absolute;
+        right: 0px;
+        
     }
     .user-info .el-dropdown-link{
         position: relative;
@@ -252,7 +276,7 @@
         float: right;
         padding-right: 10px;
         font-size:18px;
-        vertical-align: middle;
+        vertical-align: right;
     }
     .login-name>span:nth-child(1){
         font-weight: bold;

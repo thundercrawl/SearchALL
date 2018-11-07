@@ -1,7 +1,8 @@
 <template>
 <div id="search">
 <el-input  placeholder="Search input" v-model="searchData" ></el-input>
-<el-button @click="search">elastic search</el-button>
+<el-button type="primary" icon="el-icon-search" @click="search">Search</el-button>
+
 
 </div>
 </template>
@@ -40,3 +41,24 @@ methods:
 }
 
 </script>
+
+<style>
+.search
+{
+ /*   float: left;*/
+    width:450px;
+   
+
+}
+.search .el-input
+{
+    width:300px;
+     margin-right:30px;
+
+    
+}
+.search .el-button{
+
+ 
+}
+</style>

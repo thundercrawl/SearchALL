@@ -1,8 +1,12 @@
 <template>
  <div>
-     <headView/>
-
-    <bodyView/>
+     
+    
+  <el-container>
+  <el-header><headView/></el-header>
+  <el-main><bodyView/></el-main>
+  <el-footer>Footer</el-footer>
+</el-container>
 
   </div>
 </template>

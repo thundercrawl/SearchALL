@@ -10,6 +10,7 @@ import config from './config';
 import ElementUI from 'element-ui';
 import VueCookie from "vue-cookie";
 /*themes import*/
+import '../theme/index.css'
 //import './theme/iview.less'
 
 
@@ -63,7 +64,7 @@ new Vue({
                 //为什么刷新后这里的this.$route.path始终是"/"呢，所以先用dom方法判断
             if (domRoute === "/" || domRoute === "/login") {
                 this.$cookie.set('userName', 'defaultUser', -1);
-                sessionStorage.setItem('userName', 'defaultUser')
+                sessionStorage.setItem('defaultuserName', 'defaultUser')
                     // this.$cookie.get('userInfo', "", -1);
                     // this.$cookie.get('userMenu', "", -1);
                 this.$global.logInfo(this.$cookie + " cookie username:" + this.$cookie.get('userName'))
