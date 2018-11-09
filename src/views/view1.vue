@@ -1,6 +1,6 @@
 <template>
 <div id='view1'>
-<el-container  style="height: 500px; border: 1px solid #eee">
+<el-container  style=" border: 1px solid #eee">
      <!--
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
      
@@ -53,8 +53,11 @@
     </el-menu>
   </el-aside>
   -->
+
   <el-container>
+       
     <el-header style="text-align: right; font-size: 12px">
+         <navigationbar/>
       <el-dropdown>
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
@@ -76,7 +79,11 @@
         </el-table-column>
         <el-table-column label="操作">
          
+
          <template slot-scope="scope">
+        <el-tooltip content="查看" placement="top">
+           <el-button  icon="el-icon-view"></el-button> 
+        </el-tooltip>
         <el-tooltip content="编辑" placement="top">
         <el-button  icon="el-icon-edit"></el-button>
          </el-tooltip>
@@ -86,6 +93,8 @@
          <el-tooltip content="删除" placement="top">
         <el-button  icon="el-icon-delete"></el-button>
          </el-tooltip>
+
+
         </template>
         <!--
              <template slot-scope="scope">
@@ -96,6 +105,14 @@
         
         </el-table-column>
       </el-table>
+
+    <div class="block">
+  
+    <el-pagination
+      layout="prev, pager, next"
+      :total="totalPage(tableData,10)">
+    </el-pagination>
+  </div>
     </el-main>
   </el-container>
 </el-container>
@@ -107,9 +124,9 @@
       padding:0px
   }
   .el-header {
-    background-color: #606266;
+    background-color: #545c64;
     color: #333;
-    line-height: 60px;
+    line-height: 60px;  
   }
   
   .el-aside {
@@ -118,7 +135,11 @@
 </style>
 
 <script>
+import navigationbar from "@/views/Navigationbar.vue"
   export default {
+      components: {
+            navigationbar
+        },
     data() {
       const item = {
         date: '2016-05-02',
@@ -131,6 +152,11 @@
     },
     methods:
     {
+    totalPage(data,itemOnePage)
+    {
+      return (data.length()/itemOnePage)
+
+    },
     checkPermission(type)
     {
         return true
