@@ -2,6 +2,7 @@
 
 ## Project setup
 ```
+npm cache clean --force（ if any error）
 npm install
 ```
 
