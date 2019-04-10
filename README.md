@@ -3,6 +3,7 @@
 ## Project setup
 ```
 npm cache clean --force（ if any error）
+npm install --registry=https://registry.npm.taobao.org （caused by local network blocking issue,should change to local repository)
 npm install
 ```
 
